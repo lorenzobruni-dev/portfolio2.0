@@ -4,9 +4,10 @@ import { Flex } from "@mantine/core";
 const Contact = () => {
   return (
     <Flex
-      align={"center"}
       justify={"center"}
       direction={"column"}
+      mx={25}
+      mb={25}
       h={"100%"}
       wrap={"wrap"}
     >

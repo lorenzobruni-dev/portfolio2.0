@@ -16,8 +16,7 @@ const FormValidation = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const theme = useMantineTheme();
   const styleInputForm: Sx = {
-    label: { fontSize: 18, fontStyle: "italic" },
-    input: { fontSize: 16 },
+    input: { fontSize: 16, borderTop: 0, backgroundColor: "none" },
     error: { fontSize: 16 },
   };
   const form = useForm({
@@ -40,7 +39,7 @@ const FormValidation = () => {
   }, []);
 
   return (
-    <Box maw={500} miw={300} mx="auto">
+    <Box maw={500} miw={300}>
       <Text
         ta={"left"}
         fz={50}
@@ -54,14 +53,12 @@ const FormValidation = () => {
         <h2>Get in touch</h2>
       </Text>
       <TextInput
-        label="Name"
         placeholder="Name"
         sx={styleInputForm}
         {...form.getInputProps("name")}
       />
       <TextInput
         mt={10}
-        label="Email"
         placeholder="Email"
         sx={styleInputForm}
         {...form.getInputProps("email")}

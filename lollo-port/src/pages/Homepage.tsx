@@ -2,7 +2,11 @@ import { Flex } from "@mantine/core";
 import ContentHomepage from "../components/homepage/contentHomepage/ContentHomepage";
 import styleHomepage from "./Homepage.module.css";
 
-const Homepage = () => {
+export interface HomepageProps {
+  isMobile: boolean;
+}
+
+const Homepage = ({ isMobile }: HomepageProps) => {
   return (
     <Flex
       className={styleHomepage.home}
@@ -10,10 +14,9 @@ const Homepage = () => {
       align={"center"}
       h={"100%"}
       justify={"space-evenly"}
-      pos={"absolute"}
-      top={0}
+      pos={"relative"}
     >
-      <ContentHomepage />
+      <ContentHomepage isMobile={isMobile} />
     </Flex>
   );
 };

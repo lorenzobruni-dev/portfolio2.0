@@ -1,13 +1,31 @@
-import BodyHomepage from "../bodyHomepage/BodyHomepage";
-import { Button, Flex, Text, useMantineTheme } from "@mantine/core";
+import { Button, Flex, Sx, Text, useMantineTheme } from "@mantine/core";
 import { useLocation } from "wouter";
+import { HomepageProps } from "../../../pages/Homepage";
 
-const ContentHomepage = () => {
+const ContentHomepage = ({ isMobile }: HomepageProps) => {
   const theme = useMantineTheme();
   const [, setLocation] = useLocation();
+  const styleBodyText: Sx = {
+    fontFamily: "La belle Aurore",
+    fontStyle: "italic",
+  };
+
+  const styleFlexTags: Sx = {
+    textAlign: "left",
+    fontFamily: "La belle Aurore",
+    width: "100%",
+  };
   return (
-    <BodyHomepage>
-      <Flex direction={"column"} gap={10}>
+    <>
+      <Flex direction={"column"} sx={styleFlexTags}>
+        <Text sx={styleBodyText} color={theme.colors.yellow[7]}>
+          {"<html>"}
+        </Text>
+        <Text sx={styleBodyText} color={theme.colors.yellow[7]} ml={25}>
+          {"<body>"}
+        </Text>
+      </Flex>
+      <Flex direction={"column"} gap={10} w={"100%"}>
         <Text
           fz={30}
           fw={400}
@@ -27,8 +45,8 @@ const ContentHomepage = () => {
         </Text>
         <Button
           variant="default"
-          w={"90%"}
           onClick={() => setLocation("/contact")}
+          w={!isMobile ? 350 : "calc(100% - 150px)"}
           sx={{
             backgroundColor: "inherit",
             border: `1px solid ${theme.colors.yellow[3]}`,
@@ -43,8 +61,15 @@ const ContentHomepage = () => {
           Contact me
         </Button>
       </Flex>
-    </BodyHomepage>
+      <Flex direction={"column"} sx={styleFlexTags}>
+        <Text sx={styleBodyText} color={theme.colors.yellow[7]} ml={25}>
+          {"</body>"}
+        </Text>
+        <Text sx={styleBodyText} color={theme.colors.yellow[7]}>
+          {"</html>"}
+        </Text>
+      </Flex>
+    </>
   );
 };
-
 export default ContentHomepage;

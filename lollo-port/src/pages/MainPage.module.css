@@ -7,5 +7,7 @@
 .others {
     width: 100vw;
     height: 100vh;
-    background: url("../assets/backgrounds/othersBackgroundImg.svg");
+    background-size: auto;
+    background-color: #113550;
 }
+

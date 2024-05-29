@@ -4,7 +4,7 @@ import { faEnvelope, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
-type SidebarProps = {
+export type SidebarProps = {
   onHomePageIconClick: () => void;
   onAboutMeIconClick: () => void;
   onContactMeIconClick: () => void;
