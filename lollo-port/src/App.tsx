@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import {Redirect, Route, Router, Switch} from "wouter";
-import MainPage from "./pages/MainPage";
 
+const MainPage = React.lazy(() => import("./pages/MainPage"));
 function App() {
 
   return (
