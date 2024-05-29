@@ -1,4 +1,4 @@
-import { Box, Burger, Drawer, Grid, useMantineTheme } from "@mantine/core";
+import {Box, Burger, Drawer, Flex, Grid, Text, useMantineTheme} from "@mantine/core";
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import styles from "./MainPage.module.css";
@@ -7,6 +7,7 @@ import Contact from "./Contact";
 import { useDisclosure, useElementSize } from "@mantine/hooks";
 import SidebarMobile from "../components/sidebar/SidebarMobile";
 import { useLocationHook } from "../hooks";
+import {useSwipeable} from "react-swipeable";
 
 type MainPageProps = {
   location: string;
@@ -22,15 +23,17 @@ const RenderCorrectComponent: React.FC<PropsRenderComponent> = ({
   location,
   isMobile,
 }) => {
+
+  const theme = useMantineTheme()
   switch (location) {
     case "/":
       return <Homepage isMobile={isMobile} />;
     case "/about-me":
-      return <></>;
+      return <Flex align={"center"} justify={"center"} h={"100%"}><Text fs={"italic"}  color={theme.colors.gray[6]}>404 Working progress...</Text></Flex>;
     case "/contact":
-      return <Contact />;
+      return <Contact isMobile={isMobile} />;
     default:
-      return <>Home</>;
+      return <Homepage isMobile={isMobile} />;
   }
 };
 
@@ -41,8 +44,12 @@ const MainPage = ({ location, isHomepage }: MainPageProps) => {
   const [opened, { toggle }] = useDisclosure();
   const isMobile = width < 800;
 
+  const handlerOnSwipeRight = useSwipeable({
+    onSwipedRight: () => toggle(),
+  })
+
   return (
-    <>
+    <Box {...handlerOnSwipeRight}>
       {isMobile && (
         <Drawer
           opened={opened}
@@ -97,7 +104,7 @@ const MainPage = ({ location, isHomepage }: MainPageProps) => {
           <RenderCorrectComponent location={location} isMobile={isMobile} />
         </Grid.Col>
       </Grid>
-    </>
+    </Box>
   );
 };
 

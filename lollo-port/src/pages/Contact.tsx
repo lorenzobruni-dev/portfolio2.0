@@ -1,7 +1,10 @@
 import FormValidation from "../components/contactMe/formValidation/FormValidation";
 import { Flex } from "@mantine/core";
 
-const Contact = () => {
+export interface ContactProps{
+  isMobile: boolean
+}
+const Contact = ({isMobile}: ContactProps) => {
   return (
     <Flex
       justify={"center"}
@@ -11,7 +14,7 @@ const Contact = () => {
       h={"100%"}
       wrap={"wrap"}
     >
-      <FormValidation />
+      <FormValidation isMobile={isMobile}/>
     </Flex>
   );
 };

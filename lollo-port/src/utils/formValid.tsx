@@ -1,5 +1,6 @@
 import { UseFormReturnType } from "@mantine/form";
 import emailjs from "@emailjs/browser";
+import {MailForm} from "../const";
 
 type FormType = UseFormReturnType<
   { name: string; email: string; description: string },
@@ -12,9 +13,9 @@ type FormType = UseFormReturnType<
 export const handleSend = async (
   e: any,
   setButtonClicked: React.Dispatch<React.SetStateAction<boolean>>,
-  form: FormType,
+  form: MailForm,
 ) => {
-  setButtonClicked(true);
+  const {DescrizioneUtente , NomeUtente , MailUtente} = form
   setTimeout(() => {
     setButtonClicked(false);
   }, 3000);
@@ -23,10 +24,10 @@ export const handleSend = async (
   const templateId = "template_4r36c5a";
   try {
     await emailjs.send(serviceId, templateId, {
-      name: form.getInputProps("name").value,
-      email: form.getInputProps("email").value,
-      recipient: form.getInputProps("description").value,
-    });
+      name: NomeUtente,
+      email: MailUtente,
+      recipient: DescrizioneUtente,
+    }).then(() =>   setButtonClicked(true));
   } catch (error) {
     console.log(error);
   }

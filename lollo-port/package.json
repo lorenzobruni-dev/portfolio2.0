@@ -1,7 +1,7 @@
 {
   "name": "lollo-port",
   "version": "0.1.0",
-  "homepage": "https://lorenzobruni-dev.netlify.app",
+  "homepage": "https://lorenzobruni-dev.netlify.app/",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
@@ -23,6 +23,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "react-swipeable": "^7.0.1",
     "source-map-loader": "^4.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
@@ -31,11 +32,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "builddeploy": "react-scripts build & netlify deploy --prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
