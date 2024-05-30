@@ -19,8 +19,8 @@ const SidebarMobile = (props: SidebarProps & SidebarMobileProps) => {
   };
 
   return (
-    <Flex justify={"center"} mt={"calc(100% - 50px)"}>
-      <Flex align={"center"} direction={"column"} gap={40}>
+    <Flex align={"center"} h={"100%"} justify={"center"}>
+      <Flex direction={"column"} gap={40}>
         <Text
           fz={14}
           lts={"2"}
@@ -54,7 +54,7 @@ const SidebarMobile = (props: SidebarProps & SidebarMobileProps) => {
         >
           /about
         </Text>
-      </Flex>
+      </Flex>{" "}
     </Flex>
   );
 };

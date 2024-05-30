@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import ToastProvider from "./providers/ToastProvider";
 import { MantineProvider } from "@mantine/core";
 
 const root = ReactDOM.createRoot(
@@ -16,6 +17,8 @@ root.render(
       breakpoints: { xs: "20em", sm: "36em" },
     }}
   >
-    <App />
+    <ToastProvider>
+      <App />
+    </ToastProvider>
   </MantineProvider>,
 );

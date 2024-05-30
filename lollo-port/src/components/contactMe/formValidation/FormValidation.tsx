@@ -11,15 +11,16 @@ import {
 } from "@mantine/core";
 import emailjs from "@emailjs/browser";
 import React, { useEffect, useState } from "react";
-import {
-  MailForm,
-  SERVICE_ID_emailJS,
-  TEMPLATE_ID_emailJS,
-} from "../../../const";
+import { MailForm } from "../../../const";
 import iconInsta from "../../../assets/social/brand-instagram.svg";
 import iconGithub from "../../../assets/social/brand-github.svg";
 import iconLinkedin from "../../../assets/social/brand-linkedin.svg";
 import { ContactProps } from "../../../pages/Contact";
+import { toastMessageWithIcon } from "../../../utils/toastHelper";
+import {
+  isAllFieldsAreSetUpCorrectly,
+  sendEmail,
+} from "../../../utils/emailSenderHelper";
 
 const FormValidation = ({ isMobile }: ContactProps) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -29,8 +30,6 @@ const FormValidation = ({ isMobile }: ContactProps) => {
     NomeUtente: "",
     DescrizioneUtente: "",
   });
-  const fieldsEmpty =
-    !form.MailUtente || !form.NomeUtente || !form.DescrizioneUtente;
 
   const styleInputForm: Sx = {
     input: {
@@ -46,14 +45,22 @@ const FormValidation = ({ isMobile }: ContactProps) => {
 
   const styleSocial: Sx = {
     cursor: "pointer",
+    ...(isMobile
+      ? {
+          width: 24,
+          height: 24,
+          marginBottom: 24,
+        }
+      : {}),
   };
 
   useEffect(() => {
-    setButtonDisabled(fieldsEmpty);
-  }, [fieldsEmpty]);
+    setButtonDisabled(!Boolean(isAllFieldsAreSetUpCorrectly(form)));
+  }, [form]);
 
   useEffect(() => {
-    emailjs.init("NwEaXwEcudX7XpxtT");
+    const emailServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    if (emailServiceId) emailjs.init(emailServiceId);
   }, []);
 
   useEffect(() => {
@@ -65,20 +72,18 @@ const FormValidation = ({ isMobile }: ContactProps) => {
   }, []);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target;
+    const { name, value } = event.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     setButtonDisabled(true);
-    emailjs.send(SERVICE_ID_emailJS, TEMPLATE_ID_emailJS, {
-      name: form.NomeUtente,
-      email: form.MailUtente,
-      recipient: form.DescrizioneUtente,
-    });
+    if (isAllFieldsAreSetUpCorrectly(form))
+      sendEmail(form).then(() =>
+        toastMessageWithIcon("Messaggio inoltrato correttamente"),
+      );
   };
 
   const targetBlank = (url: string) => {
@@ -90,19 +95,16 @@ const FormValidation = ({ isMobile }: ContactProps) => {
       align={"center"}
       direction={isMobile ? "column" : "row"}
       sx={{ justifyContent: "center" }}
-      gap={8}
+      gap={isMobile ? 8 : 32}
     >
       <Flex
         direction={isMobile ? "row" : "column"}
         h={"100%"}
         align={"center"}
-        justify={"center"}
         gap={8}
       >
         <Image
           src={iconInsta}
-          w={25}
-          h={25}
           sx={styleSocial}
           onClick={() =>
             targetBlank("https://www.instagram.com/brunilorenzoo/")
@@ -110,15 +112,11 @@ const FormValidation = ({ isMobile }: ContactProps) => {
         />
         <Image
           src={iconGithub}
-          w={25}
-          h={25}
           sx={styleSocial}
           onClick={() => targetBlank("https://github.com/lorenzobruni-dev")}
         />
         <Image
           src={iconLinkedin}
-          w={25}
-          h={25}
           sx={styleSocial}
           onClick={() =>
             targetBlank("https://www.linkedin.com/in/lorenzo-b-945073155/")
@@ -184,6 +182,15 @@ const FormValidation = ({ isMobile }: ContactProps) => {
                 backgroundColor: theme.colors.gray[6],
                 fontSize: 16,
               },
+              "textarea::-webkit-scrollbar": {
+                width: 12,
+              },
+
+              "textarea::-webkit-scrollbar-thumb": {
+                backgroundColor: "darkgrey",
+                borderRadius: 3,
+                outline: " 1px solid slategrey",
+              },
             })}
           />
           <Button
@@ -191,7 +198,7 @@ const FormValidation = ({ isMobile }: ContactProps) => {
             disabled={buttonDisabled}
             mt="sm"
             variant={"outline"}
-            onClick={(e) => handleSubmit(e)}
+            onClick={handleSubmit}
             sx={{
               cursor: "pointer",
               backgroundColor: "inherit",
