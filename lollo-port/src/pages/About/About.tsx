@@ -15,7 +15,7 @@ const About = ({ isMobile }: CommonProps) => {
       mx={isMobile ? 20 : 0}
     >
       <Stack spacing={"md"}>
-        <Flex direction={"column"} gap={8}>
+        <Flex direction={"column"} gap={4}>
           <Text
             ta={"left"}
             fz={isMobile ? 24 : 50}
@@ -25,14 +25,18 @@ const About = ({ isMobile }: CommonProps) => {
             sx={{
               width: "100%",
               height: "100%",
-              letterSpacing: -3,
+              letterSpacing: -1,
             }}
           >
             🖥 Working experience
           </Text>
           <TimelineExperience isMobile={isMobile} />
         </Flex>
-        <Flex direction={"column"} gap={8}>
+        <Flex
+          direction={"column"}
+          justify={isMobile ? "flex-start" : "flex-end"}
+          gap={4}
+        >
           <Text
             ta={"left"}
             fz={isMobile ? 24 : 50}
@@ -41,8 +45,7 @@ const About = ({ isMobile }: CommonProps) => {
             mb={16}
             sx={{
               width: "100%",
-              height: "100%",
-              letterSpacing: -3,
+              letterSpacing: -1,
             }}
           >
             👨‍🏫 Formation

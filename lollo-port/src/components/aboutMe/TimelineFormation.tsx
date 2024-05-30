@@ -33,12 +33,12 @@ const TimelineFormation = ({ isMobile }: TimelinePropsCommon) => {
             c={theme.colors.blue[7]}
             bullet={<Image src={value.icon} />}
             title={value.title}
-            fz={isMobile ? 16 : 22}
+            fz={isMobile ? 14 : 22}
           >
-            <Text color="dimmed" fz={14}>
+            <Text color="dimmed" fz={12}>
               {value.description}
             </Text>
-            <Text size="xs" mt={4}>
+            <Text size="xs" mt={4} fz={12}>
               {value.periodWorking}
             </Text>
           </Timeline.Item>
