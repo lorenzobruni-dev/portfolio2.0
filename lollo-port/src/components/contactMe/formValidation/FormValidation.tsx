@@ -11,18 +11,18 @@ import {
 } from "@mantine/core";
 import emailjs from "@emailjs/browser";
 import React, { useEffect, useState } from "react";
-import { MailForm } from "../../../const";
+import { MailForm } from "../../../utils/const";
 import iconInsta from "../../../assets/social/brand-instagram.svg";
 import iconGithub from "../../../assets/social/brand-github.svg";
 import iconLinkedin from "../../../assets/social/brand-linkedin.svg";
-import { ContactProps } from "../../../pages/Contact";
+import { CommonProps } from "../../../pages/Contact/Contact";
 import { toastMessageWithIcon } from "../../../utils/toastHelper";
 import {
   isAllFieldsAreSetUpCorrectly,
   sendEmail,
 } from "../../../utils/emailSenderHelper";
 
-const FormValidation = ({ isMobile }: ContactProps) => {
+const FormValidation = ({ isMobile }: CommonProps) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const theme = useMantineTheme();
   const [form, setForm] = useState<MailForm>({
@@ -134,7 +134,6 @@ const FormValidation = ({ isMobile }: ContactProps) => {
             width: "100%",
             height: "100%",
             letterSpacing: -3,
-            fontFamily: "Coolvetica",
           }}
         >
           👋 Hey yo!💻

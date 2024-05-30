@@ -8,13 +8,14 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import React from "react";
-import Sidebar from "../components/sidebar/Sidebar";
+import Sidebar from "../../components/sidebar/Sidebar";
 import styles from "./MainPage.module.css";
-import Homepage from "./Homepage";
-import Contact from "./Contact";
+import Homepage from "../Homepage/Homepage";
+import Contact from "../Contact/Contact";
 import { useDisclosure, useElementSize } from "@mantine/hooks";
-import SidebarMobile from "../components/sidebar/SidebarMobile";
-import { useLocationHook } from "../hooks";
+import SidebarMobile from "../../components/sidebar/SidebarMobile";
+import { useLocationHook } from "../../utils/hooks";
+import About from "../About/About";
 
 type MainPageProps = {
   location: string;
@@ -35,13 +36,7 @@ const RenderCorrectComponent: React.FC<PropsRenderComponent> = ({
     case "/":
       return <Homepage isMobile={isMobile} />;
     case "/about-me":
-      return (
-        <Flex align={"center"} justify={"center"} h={"100%"}>
-          <Text fs={"italic"} color={theme.colors.gray[6]}>
-            404 Working progress...
-          </Text>
-        </Flex>
-      );
+      return <About isMobile={isMobile} />;
     case "/contact":
       return <Contact isMobile={isMobile} />;
     default:

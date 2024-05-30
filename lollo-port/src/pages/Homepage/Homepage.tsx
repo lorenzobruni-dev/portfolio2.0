@@ -1,5 +1,5 @@
 import { Flex } from "@mantine/core";
-import ContentHomepage from "../components/homepage/contentHomepage/ContentHomepage";
+import ContentHomepage from "../../components/homepage/contentHomepage/ContentHomepage";
 import styleHomepage from "./Homepage.module.css";
 
 export interface HomepageProps {

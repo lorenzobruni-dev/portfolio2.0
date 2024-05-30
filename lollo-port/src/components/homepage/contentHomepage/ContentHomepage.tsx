@@ -1,6 +1,6 @@
 import { Button, Flex, Sx, Text, useMantineTheme } from "@mantine/core";
 import { useLocation } from "wouter";
-import { HomepageProps } from "../../../pages/Homepage";
+import { HomepageProps } from "../../../pages/Homepage/Homepage";
 
 const ContentHomepage = ({ isMobile }: HomepageProps) => {
   const theme = useMantineTheme();

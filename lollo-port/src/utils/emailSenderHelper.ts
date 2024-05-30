@@ -1,5 +1,5 @@
 import emailjs from "@emailjs/browser";
-import { MailForm, SERVICE_ID_emailJS, TEMPLATE_ID_emailJS } from "../const";
+import { MailForm, SERVICE_ID_emailJS, TEMPLATE_ID_emailJS } from "./const";
 
 export function sendEmail(form: MailForm) {
   return emailjs.send(SERVICE_ID_emailJS, TEMPLATE_ID_emailJS, {
