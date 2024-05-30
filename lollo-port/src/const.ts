@@ -5,3 +5,6 @@ export type MailForm = {
     MailUtente?: string
     DescrizioneUtente?: string
 }
+
+export const SERVICE_ID_emailJS = "service_4dvul28";
+export const TEMPLATE_ID_emailJS = "template_4r36c5a";
