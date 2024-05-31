@@ -30,7 +30,7 @@ const SidebarMobile = (props: SidebarProps & SidebarMobileProps) => {
             toggle();
           }}
         >
-          /home
+          home/
         </Text>
         <Text
           fz={14}
@@ -41,7 +41,7 @@ const SidebarMobile = (props: SidebarProps & SidebarMobileProps) => {
             toggle();
           }}
         >
-          /contact
+          contact/
         </Text>
         <Text
           fz={14}
@@ -52,7 +52,7 @@ const SidebarMobile = (props: SidebarProps & SidebarMobileProps) => {
             toggle();
           }}
         >
-          /about
+          about/
         </Text>
       </Flex>{" "}
     </Flex>

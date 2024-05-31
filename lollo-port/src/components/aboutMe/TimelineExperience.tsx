@@ -1,7 +1,8 @@
-import { Image, Text, Timeline, useMantineTheme } from "@mantine/core";
+import { Image, Timeline, useMantineTheme } from "@mantine/core";
 import iconDev from "../../assets/social/brand-github.svg";
 import iconIT from "../../assets/generics/icon-it.svg";
 import { TimelinePropsCommon } from "./TimelineFormation";
+import TimelineCustom from "./TimelineCustom";
 
 const TimelineExperience = ({ isMobile }: TimelinePropsCommon) => {
   const itemsTimeline = {
@@ -26,24 +27,19 @@ const TimelineExperience = ({ isMobile }: TimelinePropsCommon) => {
   };
   const theme = useMantineTheme();
 
-  const arrayOfFactory = Object.entries(itemsTimeline);
+  const listOfItemValue = Object.entries(itemsTimeline);
   return (
     <Timeline active={3} lineWidth={3} bulletSize={22}>
-      {arrayOfFactory.map(([key, value]) => {
+      {listOfItemValue.map(([key, value]) => {
         return (
           <Timeline.Item
             key={key}
             c={theme.colors.blue[7]}
             bullet={<Image src={value.icon} />}
             title={value.title}
-            fz={isMobile ? 16 : 22}
+            fz={isMobile ? 12 : 22}
           >
-            <Text color="dimmed" fz={12}>
-              {value.description}
-            </Text>
-            <Text size="xs" mt={4} fz={12}>
-              {value.periodWorking}
-            </Text>
+            <TimelineCustom key={key} item={value} isMobile={isMobile} />
           </Timeline.Item>
         );
       })}

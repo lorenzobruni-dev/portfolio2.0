@@ -1,30 +1,13 @@
-import { Button, Flex, Sx, Text, useMantineTheme } from "@mantine/core";
+import { Button, Flex, Text, useMantineTheme } from "@mantine/core";
 import { useLocation } from "wouter";
 import { HomepageProps } from "../../../pages/Homepage/Homepage";
 
 const ContentHomepage = ({ isMobile }: HomepageProps) => {
   const theme = useMantineTheme();
   const [, setLocation] = useLocation();
-  const styleBodyText: Sx = {
-    fontFamily: "La belle Aurore",
-    fontStyle: "italic",
-  };
 
-  const styleFlexTags: Sx = {
-    textAlign: "left",
-    fontFamily: "La belle Aurore",
-    width: "100%",
-  };
   return (
     <>
-      <Flex direction={"column"} sx={styleFlexTags}>
-        <Text sx={styleBodyText} color={theme.colors.yellow[7]}>
-          {"<html>"}
-        </Text>
-        <Text sx={styleBodyText} color={theme.colors.yellow[7]} ml={25}>
-          {"<body>"}
-        </Text>
-      </Flex>
       <Flex direction={"column"} gap={10} w={"100%"}>
         <Text
           fz={30}
@@ -60,14 +43,6 @@ const ContentHomepage = ({ isMobile }: HomepageProps) => {
         >
           Contact me
         </Button>
-      </Flex>
-      <Flex direction={"column"} sx={styleFlexTags}>
-        <Text sx={styleBodyText} color={theme.colors.yellow[7]} ml={25}>
-          {"</body>"}
-        </Text>
-        <Text sx={styleBodyText} color={theme.colors.yellow[7]}>
-          {"</html>"}
-        </Text>
       </Flex>
     </>
   );

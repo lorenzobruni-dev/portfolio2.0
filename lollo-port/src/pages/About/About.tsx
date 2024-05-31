@@ -1,11 +1,10 @@
-import { Flex, Stack, Text, useMantineTheme } from "@mantine/core";
+import { Flex, Stack, Text } from "@mantine/core";
 import React from "react";
 import TimelineExperience from "../../components/aboutMe/TimelineExperience";
 import TimelineFormation from "../../components/aboutMe/TimelineFormation";
 import { CommonProps } from "../Contact/Contact";
 
 const About = ({ isMobile }: CommonProps) => {
-  const theme = useMantineTheme();
   return (
     <Flex
       align={"center"}
@@ -18,8 +17,8 @@ const About = ({ isMobile }: CommonProps) => {
         <Flex direction={"column"} gap={4}>
           <Text
             ta={"left"}
-            fz={isMobile ? 24 : 50}
-            color={theme.colors.blue[7]}
+            fz={isMobile ? 20 : 50}
+            color={"#c5d9ca"}
             fw={400}
             mb={16}
             sx={{
@@ -39,8 +38,8 @@ const About = ({ isMobile }: CommonProps) => {
         >
           <Text
             ta={"left"}
-            fz={isMobile ? 24 : 50}
-            color={theme.colors.blue[7]}
+            fz={isMobile ? 20 : 50}
+            color={"#c5d9ca"}
             fw={400}
             mb={16}
             sx={{

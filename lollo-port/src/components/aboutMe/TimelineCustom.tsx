@@ -1,4 +1,4 @@
-import { Image, Text, Timeline, useMantineTheme } from "@mantine/core";
+import { Sx, Text } from "@mantine/core";
 
 interface TimelineCustomProps {
   key: string;
@@ -8,26 +8,24 @@ interface TimelineCustomProps {
     description: string;
     periodWorking: string;
   };
+  isMobile: boolean;
 }
 
-const TimelineCustom = ({ item, key }: TimelineCustomProps) => {
-  const theme = useMantineTheme();
-  const { title, icon, description, periodWorking } = item;
+const TimelineCustom = ({ item, isMobile }: TimelineCustomProps) => {
+  const styleSXTexts: Sx = {
+    fontSize: isMobile ? 12 : 16,
+    fontStyle: "italic",
+  };
+  const { description, periodWorking } = item;
   return (
-    <Timeline.Item
-      key={key}
-      c={theme.colors.blue[7]}
-      bullet={<Image src={icon} />}
-      title={title}
-      fz={22}
-    >
-      <Text color="dimmed" fz={14}>
+    <>
+      <Text color="dimmed" sx={styleSXTexts}>
         {description}
       </Text>
-      <Text size="xs" mt={4}>
+      <Text size="xs" mt={4} sx={styleSXTexts}>
         {periodWorking}
       </Text>
-    </Timeline.Item>
+    </>
   );
 };
 export default TimelineCustom;
