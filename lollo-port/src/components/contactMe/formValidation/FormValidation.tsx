@@ -24,6 +24,7 @@ import {
 
 const FormValidation = ({ isMobile }: CommonProps) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
   const theme = useMantineTheme();
   const [form, setForm] = useState<MailForm>({
     MailUtente: "",
@@ -65,7 +66,7 @@ const FormValidation = ({ isMobile }: CommonProps) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setButtonDisabled(false);
+      if (isAllFieldsAreSetUpCorrectly(form)) setButtonDisabled(false);
     }, 15000);
 
     return () => clearTimeout(timer);
@@ -80,10 +81,12 @@ const FormValidation = ({ isMobile }: CommonProps) => {
 
   const handleSubmit = () => {
     setButtonDisabled(true);
+    setLoading(true);
     if (isAllFieldsAreSetUpCorrectly(form))
-      sendEmail(form).then(() =>
-        toastMessageWithIcon("Messaggio inoltrato correttamente"),
-      );
+      sendEmail(form).then(() => {
+        setLoading(false);
+        toastMessageWithIcon("Messaggio inoltrato correttamente");
+      });
   };
 
   const targetBlank = (url: string) => {
@@ -166,22 +169,28 @@ const FormValidation = ({ isMobile }: CommonProps) => {
               },
             })}
           />
-          <Button
-            w={"100%"}
-            disabled={buttonDisabled}
-            mt="sm"
-            variant={"outline"}
-            onClick={handleSubmit}
+          <Box
             sx={{
-              cursor: "pointer",
-              backgroundColor: "inherit",
-              border: `1px solid ${theme.colors.yellow[3]}`,
-              color: theme.colors.yellow[3],
-              transition: "all 400ms cubic-bezier(.47,1.64,.41,.8)",
+              cursor: buttonDisabled ? "not-allowed" : "pointer",
             }}
           >
-            Submit
-          </Button>
+            <Button
+              w={"100%"}
+              loading={loading}
+              disabled={buttonDisabled}
+              mt="sm"
+              variant={"outline"}
+              onClick={handleSubmit}
+              sx={{
+                backgroundColor: "inherit",
+                border: `1px solid ${theme.colors.yellow[3]}`,
+                color: theme.colors.yellow[3],
+                transition: "all 400ms cubic-bezier(.47,1.64,.41,.8)",
+              }}
+            >
+              {loading ? "" : "Submit"}
+            </Button>
+          </Box>
         </Box>
         <Flex direction={"row"} h={"100%"} align={"center"} gap={8}>
           <Image
