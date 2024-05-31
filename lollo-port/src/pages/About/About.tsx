@@ -17,11 +17,12 @@ const About = ({ isMobile }: CommonProps) => {
         <Flex direction={"column"} gap={4}>
           <Text
             ta={"left"}
-            fz={isMobile ? 20 : 50}
+            fz={isMobile ? 28 : 50}
             color={"#c5d9ca"}
             fw={400}
             mb={16}
             sx={{
+              lineClamp: 1,
               width: "100%",
               height: "100%",
               letterSpacing: -1,
@@ -38,7 +39,7 @@ const About = ({ isMobile }: CommonProps) => {
         >
           <Text
             ta={"left"}
-            fz={isMobile ? 20 : 50}
+            fz={isMobile ? 28 : 50}
             color={"#c5d9ca"}
             fw={400}
             mb={16}

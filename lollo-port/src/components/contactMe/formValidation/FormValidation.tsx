@@ -97,46 +97,20 @@ const FormValidation = ({ isMobile }: CommonProps) => {
       sx={{ justifyContent: "center" }}
       gap={isMobile ? 8 : 32}
     >
-      <Flex
-        direction={isMobile ? "row" : "column"}
-        h={"100%"}
-        align={"center"}
-        gap={8}
-      >
-        <Image
-          src={iconInsta}
-          sx={styleSocial}
-          onClick={() =>
-            targetBlank("https://www.instagram.com/brunilorenzoo/")
-          }
-        />
-        <Image
-          src={iconGithub}
-          sx={styleSocial}
-          onClick={() => targetBlank("https://github.com/lorenzobruni-dev")}
-        />
-        <Image
-          src={iconLinkedin}
-          sx={styleSocial}
-          onClick={() =>
-            targetBlank("https://www.linkedin.com/in/lorenzo-b-945073155/")
-          }
-        />
-      </Flex>
       <Flex align={"center"} direction={"column"} gap={12} miw={200} maw={500}>
         <Text
-          ta={"left"}
-          fz={50}
-          color={theme.colors.blue[7]}
+          ta={"center"}
+          fz={isMobile ? 32 : 50}
+          color={"#c5d9ca"}
           fw={400}
-          mb={16}
+          mb={12}
           sx={{
             width: "100%",
             height: "100%",
             letterSpacing: -3,
           }}
         >
-          👋 Hey yo!💻
+          Hey yo!💻👋
         </Text>
         <Text fz={14} fw={400} c={theme.colors.gray[6]}>
           If you have an interesting idea, a job offer, or a project that you
@@ -209,6 +183,27 @@ const FormValidation = ({ isMobile }: CommonProps) => {
             Submit
           </Button>
         </Box>
+        <Flex direction={"row"} h={"100%"} align={"center"} gap={8}>
+          <Image
+            src={iconInsta}
+            sx={styleSocial}
+            onClick={() =>
+              targetBlank("https://www.instagram.com/brunilorenzoo/")
+            }
+          />
+          <Image
+            src={iconGithub}
+            sx={styleSocial}
+            onClick={() => targetBlank("https://github.com/lorenzobruni-dev")}
+          />
+          <Image
+            src={iconLinkedin}
+            sx={styleSocial}
+            onClick={() =>
+              targetBlank("https://www.linkedin.com/in/lorenzo-b-945073155/")
+            }
+          />
+        </Flex>
       </Flex>
     </Flex>
   );
