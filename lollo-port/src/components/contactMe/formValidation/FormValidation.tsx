@@ -64,19 +64,15 @@ const FormValidation = ({ isMobile }: CommonProps) => {
     if (emailServiceId) emailjs.init(emailServiceId);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (isAllFieldsAreSetUpCorrectly(form)) setButtonDisabled(false);
-    }, 15000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  };
+
+  const resetAllFields = () => {
+    setForm({ MailUtente: "", DescrizioneUtente: "", NomeUtente: "" });
   };
 
   const handleSubmit = () => {
@@ -85,6 +81,7 @@ const FormValidation = ({ isMobile }: CommonProps) => {
     if (isAllFieldsAreSetUpCorrectly(form))
       sendEmail(form).then(() => {
         setLoading(false);
+        resetAllFields();
         toastMessageWithIcon("Messaggio inoltrato correttamente");
       });
   };
@@ -92,6 +89,8 @@ const FormValidation = ({ isMobile }: CommonProps) => {
   const targetBlank = (url: string) => {
     window.open(url, "_blank");
   };
+
+  console.log(form);
 
   return (
     <Flex
