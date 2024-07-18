@@ -11,16 +11,19 @@ import {
 } from "@mantine/core";
 import emailjs from "@emailjs/browser";
 import React, { useEffect, useState } from "react";
-import { MailForm } from "../../../utils/const";
-import iconInsta from "../../../assets/social/brand-instagram.svg";
-import iconGithub from "../../../assets/social/brand-github.svg";
-import iconLinkedin from "../../../assets/social/brand-linkedin.svg";
+import {
+  MailForm,
+  SocialLink,
+  SocialLinkList,
+  socialLinkList,
+} from "../../../utils/const";
 import { CommonProps } from "../../../pages/Contact/Contact";
 import { toastMessageWithIcon } from "../../../utils/toastHelper";
 import {
   isAllFieldsAreSetUpCorrectly,
   sendEmail,
 } from "../../../utils/emailSenderHelper";
+import mapValues from "lodash/mapValues";
 
 const FormValidation = ({ isMobile }: CommonProps) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -60,7 +63,7 @@ const FormValidation = ({ isMobile }: CommonProps) => {
   }, [form]);
 
   useEffect(() => {
-    const emailServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const emailServiceId = process.env.REACT_APP_EMAILS_USER_ID;
     if (emailServiceId) emailjs.init(emailServiceId);
   }, []);
 
@@ -86,11 +89,9 @@ const FormValidation = ({ isMobile }: CommonProps) => {
       });
   };
 
-  const targetBlank = (url: string) => {
-    window.open(url, "_blank");
-  };
-
-  console.log(form);
+  const mapLinkSocial = mapValues(socialLinkList, (value: SocialLink) => {
+    return { icon: value.icon, action: value.onClickAction };
+  });
 
   return (
     <Flex
@@ -192,25 +193,18 @@ const FormValidation = ({ isMobile }: CommonProps) => {
           </Box>
         </Box>
         <Flex direction={"row"} h={"100%"} align={"center"} gap={8}>
-          <Image
-            src={iconInsta}
-            sx={styleSocial}
-            onClick={() =>
-              targetBlank("https://www.instagram.com/brunilorenzoo/")
-            }
-          />
-          <Image
-            src={iconGithub}
-            sx={styleSocial}
-            onClick={() => targetBlank("https://github.com/lorenzobruni-dev")}
-          />
-          <Image
-            src={iconLinkedin}
-            sx={styleSocial}
-            onClick={() =>
-              targetBlank("https://www.linkedin.com/in/lorenzo-b-945073155/")
-            }
-          />
+          {Object.keys(mapLinkSocial)
+            .map((key) => mapLinkSocial[key as keyof SocialLinkList])
+            .map((val, key) => {
+              return (
+                <Image
+                  key={key}
+                  src={val.icon}
+                  onClick={val.action}
+                  sx={styleSocial}
+                />
+              );
+            })}
         </Flex>
       </Flex>
     </Flex>
