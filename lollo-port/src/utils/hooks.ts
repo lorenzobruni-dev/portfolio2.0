@@ -5,6 +5,11 @@ export function useLocationHook() {
   const homePage = () => setLocation(`/`);
   const contact = () => setLocation(`/contact`);
   const aboutMe = () => setLocation(`/about-me`);
+  const projectRoute = () => setLocation("/project");
 
-  return { homePage, aboutMe, contact };
+  return { homePage, aboutMe, contact, projectRoute };
+}
+
+export function useMobile(width: number) {
+  return width < 800;
 }

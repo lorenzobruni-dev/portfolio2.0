@@ -18,7 +18,7 @@ const TimelineFormation = ({ isMobile }: TimelinePropsCommon) => {
       title:
         "Istituto Statale di Istruzione Superiore 'Città di Luino - Carlo Volontè'",
       description: "IT Science",
-      periodWorking: "'16 September - '20 June",
+      periodWorking: "'15 September - '20 June",
       icon: iconSchool,
     },
   };

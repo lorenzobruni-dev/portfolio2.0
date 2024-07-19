@@ -17,6 +17,9 @@ function App() {
         <Route path={"/contact"}>
           <MainPage location={`/contact`} isHomepage={false} />
         </Route>
+        <Route path={"/project"}>
+          <MainPage location={"/project"} isHomepage={false} />
+        </Route>
         <Route>
           <Redirect to={"/"} />
         </Route>

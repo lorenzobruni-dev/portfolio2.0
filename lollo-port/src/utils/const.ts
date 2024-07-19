@@ -1,11 +1,20 @@
 import iconLinkedin from "../assets/social/brand-linkedin.svg";
 import iconInsta from "../assets/social/brand-instagram.svg";
 import iconGithub from "../assets/social/brand-github.svg";
+import { SidebarMap } from "../components/sidebar/SidebarMobile";
 
 export type MailForm = {
   NomeUtente?: string;
   MailUtente?: string;
   DescrizioneUtente?: string;
+};
+
+type SidebarActions = {
+  onHomePageIconClick: () => void;
+  onContactMeIconClick: () => void;
+  onAboutMeIconClick: () => void;
+  onProjectIconClick: () => void;
+  toggle: () => void;
 };
 
 export type SocialLink = {
@@ -33,6 +42,44 @@ export const socialLinkList = {
   },
 };
 
+export const sidebarMapValues = ({
+  onHomePageIconClick,
+  onContactMeIconClick,
+  onAboutMeIconClick,
+  onProjectIconClick,
+  toggle,
+}: SidebarActions): SidebarMap => {
+  return {
+    homePage: {
+      action: () => {
+        onHomePageIconClick();
+        toggle();
+      },
+      name: "home/",
+    },
+    contactMe: {
+      action: () => {
+        onContactMeIconClick();
+        toggle();
+      },
+      name: "contact/",
+    },
+    aboutMe: {
+      action: () => {
+        onAboutMeIconClick();
+        toggle();
+      },
+      name: "about/",
+    },
+    myProject: {
+      action: () => {
+        onProjectIconClick();
+        toggle();
+      },
+      name: "project/",
+    },
+  };
+};
 export type SocialLinkList = typeof socialLinkList;
 
 export const SERVICE_ID_emailJS = "service_4dvul28";

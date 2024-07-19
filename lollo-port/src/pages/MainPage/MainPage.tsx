@@ -6,8 +6,9 @@ import Homepage from "../Homepage/Homepage";
 import Contact from "../Contact/Contact";
 import { useDisclosure, useElementSize } from "@mantine/hooks";
 import SidebarMobile from "../../components/sidebar/SidebarMobile";
-import { useLocationHook } from "../../utils/hooks";
+import { useLocationHook, useMobile } from "../../utils/hooks";
 import About from "../About/About";
+import Project from "../Project/Project";
 
 type MainPageProps = {
   location: string;
@@ -30,6 +31,8 @@ const RenderCorrectComponent: React.FC<PropsRenderComponent> = ({
       return <About isMobile={isMobile} />;
     case "/contact":
       return <Contact isMobile={isMobile} />;
+    case "/project":
+      return <Project isMobile={isMobile} />;
     default:
       return <Homepage isMobile={isMobile} />;
   }
@@ -37,10 +40,10 @@ const RenderCorrectComponent: React.FC<PropsRenderComponent> = ({
 
 const MainPage = ({ location, isHomepage }: MainPageProps) => {
   const theme = useMantineTheme();
-  const { homePage, contact, aboutMe } = useLocationHook();
+  const { homePage, contact, aboutMe, projectRoute } = useLocationHook();
   const { ref: refGrid, width } = useElementSize();
   const [opened, { toggle }] = useDisclosure();
-  const isMobile = width < 800;
+  const isMobile = useMobile(width);
 
   return (
     <>
@@ -51,6 +54,7 @@ const MainPage = ({ location, isHomepage }: MainPageProps) => {
               onAboutMeIconClick={aboutMe}
               onContactMeIconClick={contact}
               onHomePageIconClick={homePage}
+              onProjectIconClick={projectRoute}
               toggle={toggle}
             />
           </Drawer.Content>
@@ -79,6 +83,7 @@ const MainPage = ({ location, isHomepage }: MainPageProps) => {
               onAboutMeIconClick={aboutMe}
               onContactMeIconClick={contact}
               onHomePageIconClick={homePage}
+              onProjectIconClick={projectRoute}
             />
           </Grid.Col>
         )}

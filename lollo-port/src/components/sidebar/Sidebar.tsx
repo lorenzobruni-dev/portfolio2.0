@@ -1,22 +1,37 @@
 import { ActionIcon, Flex, useMantineTheme } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faHome,
+  faUser,
+  faDiagramProject,
+} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
+type LocationType = "/" | "/contact" | "/about-me" | "/project";
 export type SidebarProps = {
   onHomePageIconClick: () => void;
   onAboutMeIconClick: () => void;
   onContactMeIconClick: () => void;
+  onProjectIconClick: () => void;
 };
 const Sidebar = ({
   onAboutMeIconClick,
   onHomePageIconClick,
   onContactMeIconClick,
+  onProjectIconClick,
 }: SidebarProps) => {
   const theme = useMantineTheme();
   const [location] = useLocation();
-  const [active, setActive] = useState([false, false, false]);
+  const locationToActiveMap: Record<LocationType, boolean[]> = {
+    "/": [true, false, false, false],
+    "/contact": [false, true, false, false],
+    "/about-me": [false, false, true, false],
+    "/project": [false, false, false, true],
+  };
+
+  const [active, setActive] = useState([false, false, false, false]);
   const handleClick = (action: () => void, index: number) => {
     const newActive = Array(active.length).fill(false);
     newActive[index] = true;
@@ -25,15 +40,16 @@ const Sidebar = ({
   };
 
   useEffect(() => {
-    if (location === `/`) setActive([true, false, false]);
-    else if (location === `/contact`) setActive([false, true, false]);
-    else setActive([false, false, true]);
+    setActive(
+      locationToActiveMap[location as LocationType] || [false, false, false],
+    );
   }, [location]);
 
   const actions = [
     { actions: onHomePageIconClick, icon: faHome },
     { actions: onContactMeIconClick, icon: faEnvelope },
     { actions: onAboutMeIconClick, icon: faUser },
+    { actions: onProjectIconClick, icon: faDiagramProject },
   ];
 
   return (
